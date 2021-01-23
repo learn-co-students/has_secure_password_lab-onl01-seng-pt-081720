@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     def create
         if not_proper_entry
             flash[:message] = "Must Enter Name and Password"
-            redirect_to new_user_path
+            redirect_to login_path
         else
             user = User.find_by(name: params[:user][:name])
             if !!user && !!user.authenticate(params[:user][:password])
