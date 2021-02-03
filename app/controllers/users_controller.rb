@@ -5,11 +5,10 @@ class UsersController < ApplicationController
     def create
         @user = User.create(user_params)
 
-        if @user && @user.authenticate(params[:user][:password])
+        if @user && @user.authenticate(params[:user][:password]) && params[:user][:password]==params[:user][:password_confirmation]
             session[:user_id] = @user.id
         else
-            binding.pry
-            redirect_to '/users/new'
+            redirect_to '/users'
         end
     end
 
